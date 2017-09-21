@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <meta charset="utf-8">
+  <title>OverWatch Player Stats</title>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron text-center" id="header">
+      <img id="logo" src="assets/images/logo.jpg" alt="">
+      <h1>Overwatch Player Search</h1>
+      <form>
+        <input placeholder="battletag-number" id="search" type="text" autocomplete="off">
+        <button id="button" type="submit" class="btn btn-warning">Search</button>
+      </form>
+    </div>
+
+    <div id="loading" style="display:none"><img id="loading-gif" src="assets/images/loading.gif" alt=""></div>
+    <div id="data-panel" class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Player Stats (Competitive)</h4>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Tier</th>
+              <th>Total Games</th>
+              <th>Wins</th>
+              <th>Losses</th>
+              <th>Win Rate (%)</th>
+            </tr>
+          </thead>
+          <tbody id="stat-data"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div id="heroes-pic" class="panel panel-default col-xs-6">
+          <div class="panel-heading">
+            <h4 class="panel-heading">Heroes</h4>
+          </div>
+          <div id="heroes-portrait" class="panel-body">
+            <img id="ana" class="port" src="assets/images/heroes/ana.png" alt="">
+            <img id="bastion" class="port" src="assets/images/heroes/bastion.png" alt="">
+            <img id="doomfist" class="port" src="assets/images/heroes/doomfist.png" alt="">
+            <img id="genji" class="port" src="assets/images/heroes/genji.png" alt="">
+            <img id="hanzo" class="port" src="assets/images/heroes/hanzo.png" alt="">
+            <img id="junkrat" class="port" src="assets/images/heroes/junkrat.png" alt="">
+            <img id="lucio" class="port" src="assets/images/heroes/lucio.png" alt="">
+            <img id="mccree" class="port" src="assets/images/heroes/mccree.png" alt="">
+            <img id="mei" class="port" src="assets/images/heroes/mei.png" alt="">
+            <img id="mercy" class="port" src="assets/images/heroes/mercy.png" alt="">
+            <img id="orisa" class="port" src="assets/images/heroes/orisa.png" alt="">
+            <img id="pharah" class="port" src="assets/images/heroes/pharah.png" alt="">
+            <img id="reaper" class="port" src="assets/images/heroes/reaper.png" alt="">
+            <img id="reinhardt" class="port" src="assets/images/heroes/reinhardt.png" alt="">
+            <img id="roadhog" class="port" src="assets/images/heroes/roadhog.png" alt="">
+            <img id="soldier76" class="port" src="assets/images/heroes/soldier76.png" alt="">
+            <img id="sombra" class="port" src="assets/images/heroes/sombra.png" alt="">
+            <img id="symmetra" class="port" src="assets/images/heroes/symmetra.png" alt="">
+            <img id="torbjorn" class="port" src="assets/images/heroes/torbjorn.png" alt="">
+            <img id="tracer" class="port" src="assets/images/heroes/tracer.png" alt="">
+            <img id="widowmaker" class="port" src="assets/images/heroes/widowmaker.png" alt="">
+            <img id="winston" class="port" src="assets/images/heroes/winston.png" alt="">
+            <img id="zarya" class="port" src="assets/images/heroes/zarya.png" alt="">
+            <img id="zenyatta" class="port" src="assets/images/heroes/zenyatta.png" alt="">
+          </div>
+        </div>
+
+        <div id="heroes-data-panel" class="panel panel-default col-xs-6">
+          <div class="panel-heading">
+            <h4 class="panel-title">Heroes (Competitive)</h4>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Total Playtime</th>
+                  <th>Win Percentage</th>
+                  <th>Eliminations</th>
+                  <th>Final Blows</th>
+                  <th>All Dmg Done</th>
+                  <th>Medals</th>
+                </tr>
+              </thead>
+              <tbody id="heroes-stat-data"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/javascript/app.js" charset="utf-8"></script>
+</body>
+
+</html>

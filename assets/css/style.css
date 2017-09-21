@@ -1,0 +1,20 @@
+#loading {
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#loading-gif {
+  width: 300px;
+  height: 300px;
+}
+
+img {
+  width: 100px;
+  height: 150px;
+}
+
+#logo {
+  width: 200px;
+}
