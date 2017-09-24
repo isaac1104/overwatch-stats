@@ -18,3 +18,15 @@ img {
 #logo {
   width: 200px;
 }
+
+#header {
+  background-color: #43484c;
+}
+
+#search-button {
+  background-color: #f99e1a;
+}
+
+#title {
+  color: white;
+}

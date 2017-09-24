@@ -34,7 +34,7 @@ $.ajaxPrefilter((options) => {
   }
 });
 
-var heroes = [{
+const heroes = [{
     name: "ana",
     image: "assets/images/heroes/ana.png"
   },
@@ -136,7 +136,7 @@ var heroes = [{
   }
 ];
 
-$("#search-button").on("click", function(event) {
+$("#search-button").on("click", (event) => {
   event.preventDefault();
   var search = $("#search").val().trim();
   if (search !== "") {
@@ -166,11 +166,13 @@ $("#search-button").on("click", function(event) {
         statusCode: {
           429: function() {
             alert("Too many requests! Please refresh the page and try again later");
+            hidePanels();
           }
         }
       }).done((response) => {
         $("#heroes-stat-data").empty();
         console.log("Request Successful!");
+        console.log(response);
         var dataArray = [];
 
         var obj = response.us.heroes.playtime.competitive;
@@ -204,13 +206,24 @@ $("#search-button").on("click", function(event) {
           var hero = event.currentTarget.id;
           var heroTime = response.us.heroes.playtime.competitive;
           var heroStats = response.us.heroes.stats.competitive;
+          var winPercentage = heroStats[hero].general_stats.win_percentage;
+          var eliminations = heroStats[hero].general_stats.eliminations;
+          var finalBlows = heroStats[hero].general_stats.final_blows;
+          var allDmgDone = heroStats[hero].general_stats.all_damage_done;
+          var medals = heroStats[hero].general_stats.medals;
           var newTr = $("<tr class='table-row'>");
+
+          if (eliminations === undefined || finalBlows === undefined) {
+            eliminations = 0;
+            finalBlows = 0;
+          }
+
           newTr.append("<td>" + Number(heroTime[hero]).toFixed(2) + "</td>");
-          newTr.append("<td>" + heroStats[hero].general_stats.win_percentage + "</td>");
-          newTr.append("<td>" + heroStats[hero].general_stats.eliminations + "</td>");
-          newTr.append("<td>" + heroStats[hero].general_stats.final_blows + "</td>");
-          newTr.append("<td>" + heroStats[hero].general_stats.all_damage_done + "</td>");
-          newTr.append("<td>" + heroStats[hero].general_stats.medals + "</td>");
+          newTr.append("<td>" + winPercentage + "</td>");
+          newTr.append("<td>" + eliminations + "</td>");
+          newTr.append("<td>" + finalBlows + "</td>");
+          newTr.append("<td>" + allDmgDone + "</td>");
+          newTr.append("<td>" + medals + "</td>");
           $("#heroes-stat-data").append(newTr);
         });
       });
