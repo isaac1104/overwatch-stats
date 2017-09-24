@@ -16,6 +16,11 @@
     <div class="jumbotron text-center" id="header">
       <img id="logo" src="assets/images/logo.jpg" alt="">
       <h1 id="title">Overwatch Player Search</h1>
+
+        <label class="radio-inline"><input value="us" type="radio" name="optradio">US</label>
+        <label class="radio-inline"><input value="kr" type="radio" name="optradio">KR</label>
+        <label class="radio-inline"><input value="eu" type="radio" name="optradio">EU</label>
+
       <form>
         <input placeholder="battletag-number" id="search" type="text" autocomplete="off">
         <button id="search-button" type="submit" class="btn btn-warning">Search</button>
@@ -36,7 +41,7 @@
               <th>Total Games</th>
               <th>Wins</th>
               <th>Losses</th>
-              <th>Win Rate (%)</th>
+              <th>Win Rate</th>
             </tr>
           </thead>
           <tbody id="stat-data"></tbody>

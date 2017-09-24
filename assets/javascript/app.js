@@ -17,17 +17,6 @@ function emptyHeroesInfo() {
   $("#stat-data").empty();
 }
 
-function createTableData(response) {
-  var newTr = $("<tr class='table-row'>");
-  newTr.append("<td>" + response.us.stats.competitive.overall_stats.level + "</td>");
-  newTr.append("<td>" + response.us.stats.competitive.overall_stats.tier + "</td>");
-  newTr.append("<td>" + response.us.stats.competitive.overall_stats.games + "</td>");
-  newTr.append("<td>" + response.us.stats.competitive.overall_stats.wins + "</td>");
-  newTr.append("<td>" + response.us.stats.competitive.overall_stats.losses + "</td>");
-  newTr.append("<td>" + response.us.stats.competitive.overall_stats.win_rate + "</td>");
-  $("#stat-data").append(newTr);
-}
-
 $.ajaxPrefilter((options) => {
   if (options.crossDomain && $.support.cors) {
     options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
@@ -139,7 +128,9 @@ const heroes = [{
 $("#search-button").on("click", (event) => {
   event.preventDefault();
   var search = $("#search").val().trim();
-  if (search !== "") {
+  var region = $("input[name = 'optradio']:checked").val();
+
+  if (search !== "" && region !== undefined) {
     hidePanels();
     emptyHeroesInfo();
     $("#loading").fadeIn();
@@ -153,80 +144,94 @@ $("#search-button").on("click", (event) => {
         }
       }
     }).done((response) => {
-      $("#search").val("");
-      $("#loading").fadeOut();
-      $("#data-panel").fadeIn();
-      $("#heroes-pic").fadeIn();
-      $("#heroes-data-panel").fadeIn();
-      createTableData(response);
 
-      $.ajax({
-        url: "https://owapi.net/api/v3/u/" + search + "/heroes",
-        method: "GET",
-        statusCode: {
-          429: function() {
-            alert("Too many requests! Please refresh the page and try again later");
-            hidePanels();
-          }
-        }
-      }).done((response) => {
-        $("#heroes-stat-data").empty();
-        console.log("Request Successful!");
+      if (response[region] === null) {
+        alert("Player's Stats for " + region.toUpperCase() + " Are Not Available!");
+        hidePanels();
+        $("#loading").fadeOut();
+
+      } else {
+        $("#search").val("");
+        $("#loading").fadeOut();
+        $("#data-panel").fadeIn();
+        $("#heroes-pic").fadeIn();
+        $("#heroes-data-panel").fadeIn();
         console.log(response);
-        var dataArray = [];
+        var newTr = $("<tr class='table-row'>");
+        newTr.append("<td>" + response[region].stats.competitive.overall_stats.level + "</td>");
+        newTr.append("<td>" + response[region].stats.competitive.overall_stats.tier.toUpperCase() + "</td>");
+        newTr.append("<td>" + response[region].stats.competitive.overall_stats.games + "</td>");
+        newTr.append("<td>" + response[region].stats.competitive.overall_stats.wins + "</td>");
+        newTr.append("<td>" + response[region].stats.competitive.overall_stats.losses + "</td>");
+        newTr.append("<td>" + response[region].stats.competitive.overall_stats.win_rate + "%" + "</td>");
+        $("#stat-data").append(newTr);
 
-        var obj = response.us.heroes.playtime.competitive;
-
-        //sort the object keys alphabetically and push them into the empty dataArray
-        var sortedObj = Object.keys(obj).sort().forEach(function(x, y) {
-          dataArray.push(x = obj[x]);
-        });
-
-        //assign playtime keys to heroes object
-        for (var i = 0; i < heroes.length; i++) {
-          heroes[i].playTime = dataArray[i];
-        }
-
-        console.log(dataArray);
-
-        console.log(heroes);
-
-        var playedHeroes = heroes.filter((item) => {
-          return item.playTime > 0.05;
-        });
-
-        playedHeroes.forEach((item) => {
-          $("#heroes-portrait").append("<img class='port' id=" + item.name + " " + "src=" + item.image + ">");
-        });
-
-        console.log(playedHeroes);
-
-        $(".port").on("click", (event) => {
+        $.ajax({
+          url: "https://owapi.net/api/v3/u/" + search + "/heroes",
+          method: "GET",
+          statusCode: {
+            429: function() {
+              alert("Too many requests! Please refresh the page and try again later");
+              hidePanels();
+            }
+          }
+        }).done((response) => {
           $("#heroes-stat-data").empty();
-          var hero = event.currentTarget.id;
-          var heroTime = response.us.heroes.playtime.competitive;
-          var heroStats = response.us.heroes.stats.competitive;
-          var winPercentage = heroStats[hero].general_stats.win_percentage;
-          var eliminations = heroStats[hero].general_stats.eliminations;
-          var finalBlows = heroStats[hero].general_stats.final_blows;
-          var allDmgDone = heroStats[hero].general_stats.all_damage_done;
-          var medals = heroStats[hero].general_stats.medals;
-          var newTr = $("<tr class='table-row'>");
+          console.log("Request Successful!");
+          console.log(response);
+          var dataArray = [];
 
-          if (eliminations === undefined || finalBlows === undefined) {
-            eliminations = 0;
-            finalBlows = 0;
+          var obj = response[region].heroes.playtime.competitive;
+
+          //sort the object keys alphabetically and push them into the empty dataArray
+          var sortedObj = Object.keys(obj).sort().forEach(function(x, y) {
+            dataArray.push(x = obj[x]);
+          });
+
+          //assign playtime keys to heroes object
+          for (var i = 0; i < heroes.length; i++) {
+            heroes[i].playTime = dataArray[i];
           }
 
-          newTr.append("<td>" + Number(heroTime[hero]).toFixed(2) + "</td>");
-          newTr.append("<td>" + winPercentage + "</td>");
-          newTr.append("<td>" + eliminations + "</td>");
-          newTr.append("<td>" + finalBlows + "</td>");
-          newTr.append("<td>" + allDmgDone + "</td>");
-          newTr.append("<td>" + medals + "</td>");
-          $("#heroes-stat-data").append(newTr);
+          var playedHeroes = heroes.filter((item) => {
+            return item.playTime > 0.05;
+          });
+
+          playedHeroes.forEach((item) => {
+            $("#heroes-portrait").append("<img class='port' id=" + item.name + " " + "src=" + item.image + ">");
+          });
+
+          console.log(playedHeroes);
+
+          $(".port").on("click", (event) => {
+            $("#heroes-stat-data").empty();
+            var hero = event.currentTarget.id;
+            var heroTime = response[region].heroes.playtime.competitive;
+            var heroStats = response[region].heroes.stats.competitive;
+            var winPercentage = heroStats[hero].general_stats.win_percentage;
+            var eliminations = heroStats[hero].general_stats.eliminations;
+            var finalBlows = heroStats[hero].general_stats.final_blows;
+            var allDmgDone = heroStats[hero].general_stats.all_damage_done;
+            var medals = heroStats[hero].general_stats.medals;
+            var newTr = $("<tr class='table-row'>");
+
+            if (eliminations === undefined || finalBlows === undefined) {
+              eliminations = 0;
+              finalBlows = 0;
+            }
+
+            newTr.append("<td>" + Number(heroTime[hero]).toFixed(2) + " hours" + "</td>");
+            newTr.append("<td>" + Math.floor(winPercentage * 100) + "%" + "</td>");
+            newTr.append("<td>" + eliminations + "</td>");
+            newTr.append("<td>" + finalBlows + "</td>");
+            newTr.append("<td>" + allDmgDone + "</td>");
+            newTr.append("<td>" + medals + "</td>");
+            $("#heroes-stat-data").append(newTr);
+          });
         });
-      });
+      }
     });
+  } else {
+    alert("Please enter the Battletag name and select the region");
   }
 });
