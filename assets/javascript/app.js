@@ -127,7 +127,7 @@ $.ajaxPrefilter((options) => {
 
 $("#search-button").on("click", (event) => {
   event.preventDefault();
-  var search = $("#search").val().trim();
+  var search = $("#search").val().trim().toLowerCase();
   var region = $("input[name = 'optradio']:checked").val();
 
   if (search !== "" && region !== undefined) {
@@ -141,6 +141,7 @@ $("#search-button").on("click", (event) => {
       statusCode: {
         404: function() {
           alert("Error! Please input the battletag in the proper format");
+          $("#loading").fadeOut();
         }
       }
     }).done((response) => {
@@ -177,7 +178,9 @@ $("#search-button").on("click", (event) => {
           }
         }).done((response) => {
 
-          $('html, body').animate({ scrollTop: $('.row').offset().top }, 'slow');
+          $('html, body').animate({
+            scrollTop: $('.row').offset().top
+          }, 'slow');
 
           $("#heroes-stat-data").empty();
           console.log("Request Successful!");
