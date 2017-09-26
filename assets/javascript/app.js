@@ -1,10 +1,10 @@
 hidePanels();
 //URL for all heros information
-var queryURL = "https://overwatch-api.net/api/v1/hero";
+const queryURL = "https://overwatch-api.net/api/v1/hero";
 //URL for player stats (require battletag id)
-var queryURL2 = "https://owapi.net/api/v3/u/adventheorex-1416/stats";
+const queryURL2 = "https://owapi.net/api/v3/u/adventheorex-1416/stats";
 //URL for heroes stat for player (require battletag id)
-var queryURL3 = "https://owapi.net/api/v3/u/adventheorex-1416/heroes";
+const queryURL3 = "https://owapi.net/api/v3/u/adventheorex-1416/heroes";
 
 function hidePanels() {
   $("#heroes-data-panel").hide();
@@ -16,12 +16,6 @@ function emptyHeroesInfo() {
   $("#heroes-portrait").empty();
   $("#stat-data").empty();
 }
-
-$.ajaxPrefilter((options) => {
-  if (options.crossDomain && $.support.cors) {
-    options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
-  }
-});
 
 const heroes = [{
     name: "ana",
@@ -125,6 +119,12 @@ const heroes = [{
   }
 ];
 
+$.ajaxPrefilter((options) => {
+  if (options.crossDomain && $.support.cors) {
+    options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+  }
+});
+
 $("#search-button").on("click", (event) => {
   event.preventDefault();
   var search = $("#search").val().trim();
@@ -176,6 +176,9 @@ $("#search-button").on("click", (event) => {
             }
           }
         }).done((response) => {
+
+          $('html, body').animate({ scrollTop: $('.row').offset().top }, 'slow');
+
           $("#heroes-stat-data").empty();
           console.log("Request Successful!");
           console.log(response);
