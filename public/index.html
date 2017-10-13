@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>OverWatch Player Stats</title>
+</head>
+
+<body>
+  <!-- <div id="intro"><img id="main-image" src="images/main.jpg" alt=""></div> -->
+  <div id="main-content">
+    <div class="container">
+      <div class="jumbotron text-center" id="header">
+        <img id="logo" src="./images/logo.jpg" alt="">
+        <h1 id="title">Overwatch Player Search</h1>
+
+        <label class="radio-inline"><input value="us" type="radio" name="optradio">US</label>
+        <label class="radio-inline"><input value="kr" type="radio" name="optradio">KR</label>
+        <label class="radio-inline"><input value="eu" type="radio" name="optradio">EU</label>
+
+        <form>
+          <input placeholder="battletag-number" id="search" type="text" autocomplete="off">
+          <button id="search-button" type="submit" class="btn btn-warning">Search</button>
+        </form>
+      </div>
+
+      <div id="loading" style="display:none"><img id="loading-gif" src="./images/loading.gif" alt=""></div>
+      <div id="data-panel" class="panel">
+        <div class="panel-heading">
+          <h4 class="panel-title">Player Stats (Competitive)</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Tier</th>
+                <th>Total Games</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Win Rate</th>
+              </tr>
+            </thead>
+            <tbody id="stat-data"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="heroes-pic" class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-heading">Heroes Played</h4>
+            </div>
+            <div id="heroes-portrait" class="panel-body"></div>
+          </div>
+        </div>
+
+        <div class="col-xs-6">
+          <div id="heroes-data-panel" class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-title">Heroes (Competitive)</h4>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Total Playtime</th>
+                    <th>Win Percentage</th>
+                    <th>Eliminations</th>
+                    <th>Final Blows</th>
+                    <th>All Dmg Done</th>
+                    <th>Medals</th>
+                  </tr>
+                </thead>
+                <tbody id="heroes-stat-data"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="javascript/app.js" charset="utf-8"></script>
+</body>
+
+</html>

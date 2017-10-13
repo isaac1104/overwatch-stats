@@ -1,3 +1,10 @@
+// $("#main-content").hide();
+
+// setTimeout(() => {
+//   $("#intro").fadeOut();
+//   $("#main-content").fadeIn();
+// }, 2000);
+
 hidePanels();
 //URL for all heros information
 const queryURL = "https://overwatch-api.net/api/v1/hero";
@@ -19,103 +26,103 @@ function emptyHeroesInfo() {
 
 const heroes = [{
     name: "ana",
-    image: "assets/images/heroes/ana.png"
+    image: "images/heroes/ana.png"
   },
   {
     name: "bastion",
-    image: "assets/images/heroes/bastion.png"
+    image: "images/heroes/bastion.png"
   },
   {
     name: "doomfist",
-    image: "assets/images/heroes/doomfist.png"
+    image: "images/heroes/doomfist.png"
   },
   {
     name: "dva",
-    image: "assets/images/heroes/dva.png"
+    image: "images/heroes/dva.png"
   },
   {
     name: "genji",
-    image: "assets/images/heroes/genji.png"
+    image: "images/heroes/genji.png"
   },
   {
     name: "hanzo",
-    image: "assets/images/heroes/hanzo.png"
+    image: "images/heroes/hanzo.png"
   },
   {
     name: "junkrat",
-    image: "assets/images/heroes/junkrat.png"
+    image: "images/heroes/junkrat.png"
   },
   {
     name: "lucio",
-    image: "assets/images/heroes/lucio.png"
+    image: "images/heroes/lucio.png"
   },
   {
     name: "mccree",
-    image: "assets/images/heroes/mccree.png"
+    image: "images/heroes/mccree.png"
   },
   {
     name: "mei",
-    image: "assets/images/heroes/mei.png"
+    image: "images/heroes/mei.png"
   },
   {
     name: "mercy",
-    image: "assets/images/heroes/mercy.png"
+    image: "images/heroes/mercy.png"
   },
   {
     name: "orisa",
-    image: "assets/images/heroes/orisa.png"
+    image: "images/heroes/orisa.png"
   },
   {
     name: "pharah",
-    image: "assets/images/heroes/pharah.png"
+    image: "images/heroes/pharah.png"
   },
   {
     name: "reaper",
-    image: "assets/images/heroes/reaper.png"
+    image: "images/heroes/reaper.png"
   },
   {
     name: "reinhardt",
-    image: "assets/images/heroes/reinhardt.png"
+    image: "images/heroes/reinhardt.png"
   },
   {
     name: "roadhog",
-    image: "assets/images/heroes/roadhog.png"
+    image: "images/heroes/roadhog.png"
   },
   {
     name: "soldier76",
-    image: "assets/images/heroes/soldier76.png"
+    image: "images/heroes/soldier76.png"
   },
   {
     name: "sombra",
-    image: "assets/images/heroes/sombra.png"
+    image: "images/heroes/sombra.png"
   },
   {
     name: "symmetra",
-    image: "assets/images/heroes/symmetra.png"
+    image: "images/heroes/symmetra.png"
   },
   {
     name: "torbjorn",
-    image: "assets/images/heroes/torbjorn.png"
+    image: "images/heroes/torbjorn.png"
   },
   {
     name: "tracer",
-    image: "assets/images/heroes/tracer.png"
+    image: "images/heroes/tracer.png"
   },
   {
     name: "widowmaker",
-    image: "assets/images/heroes/widowmaker.png"
+    image: "images/heroes/widowmaker.png"
   },
   {
     name: "winston",
-    image: "assets/images/heroes/winston.png"
+    image: "images/heroes/winston.png"
   },
   {
     name: "zarya",
-    image: "assets/images/heroes/zarya.png"
+    image: "images/heroes/zarya.png"
   },
   {
     name: "zenyatta",
-    image: "assets/images/heroes/zenyatta.png"
+    image: "images/heroes/zenyatta.png"
   }
 ];
 
@@ -140,14 +147,14 @@ $("#search-button").on("click", (event) => {
       method: "GET",
       statusCode: {
         404: function() {
-          alert("Error! Please input the battletag in the proper format");
+          alert(`Error! Please input the battletag in the proper format`);
           $("#loading").fadeOut();
         }
       }
     }).done((response) => {
 
       if (response[region] === null) {
-        alert("Player's Stats for " + region.toUpperCase() + " Are Not Available!");
+        alert(`Player's Stats for ${region.toUpperCase()} Are Not Available!`);
         hidePanels();
         $("#loading").fadeOut();
 
@@ -158,7 +165,7 @@ $("#search-button").on("click", (event) => {
         $("#heroes-pic").fadeIn();
         $("#heroes-data-panel").fadeIn();
         console.log(response);
-        var newTr = $("<tr class='table-row'>");
+        var newTr = $(`<tr class='table-row'>`);
         newTr.append("<td>" + response[region].stats.competitive.overall_stats.level + "</td>");
         newTr.append("<td>" + response[region].stats.competitive.overall_stats.tier.toUpperCase() + "</td>");
         newTr.append("<td>" + response[region].stats.competitive.overall_stats.games + "</td>");
@@ -172,7 +179,7 @@ $("#search-button").on("click", (event) => {
           method: "GET",
           statusCode: {
             429: function() {
-              alert("Too many requests! Please refresh the page and try again later");
+              alert(`Too many requests! Please refresh the page and try again later`);
               hidePanels();
             }
           }
@@ -238,6 +245,6 @@ $("#search-button").on("click", (event) => {
       }
     });
   } else {
-    alert("Please enter the Battletag name and select the region");
+    alert(`Please enter the Battletag name and select the region`);
   }
 });

@@ -1,0 +1,24 @@
+{
+  "name": "overwatch-stats",
+  "version": "1.0.0",
+  "description": "Check your Overwatch stats and heroes stats.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaac1104/overwatch-stats.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isaac1104/overwatch-stats/issues"
+  },
+  "homepage": "https://github.com/isaac1104/overwatch-stats#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
