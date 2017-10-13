@@ -26,6 +26,7 @@ img {
 
 #logo {
   width: 200px;
+  margin-bottom: 50px;
 }
 
 #header {
@@ -61,4 +62,13 @@ color: #43484c;
 
 form {
   margin-top: 20px;
+}
+
+body {
+  padding-top: 4.5rem;
+  overflow: scroll;
+}
+
+label {
+  margin-left: 5px;
 }

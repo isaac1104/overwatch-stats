@@ -3,7 +3,8 @@
 
 <head>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
@@ -11,16 +12,24 @@
 </head>
 
 <body>
+
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Overwatch Stats Search</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+  </nav>
+
   <!-- <div id="intro"><img id="main-image" src="images/main.jpg" alt=""></div> -->
   <div id="main-content">
-    <div class="container">
+    <div class="container-fluid">
       <div class="jumbotron text-center" id="header">
         <img id="logo" src="./images/logo.jpg" alt="">
         <h1 id="title">Overwatch Player Search</h1>
 
-        <label class="radio-inline"><input value="us" type="radio" name="optradio">US</label>
-        <label class="radio-inline"><input value="kr" type="radio" name="optradio">KR</label>
-        <label class="radio-inline"><input value="eu" type="radio" name="optradio">EU</label>
+        <label class="radio-inline"><input value="us" type="radio" name="optradio"> US</label>
+        <label class="radio-inline"><input value="kr" type="radio" name="optradio"> KR</label>
+        <label class="radio-inline"><input value="eu" type="radio" name="optradio"> EU</label>
 
         <form>
           <input placeholder="battletag-number" id="search" type="text" autocomplete="off">
@@ -51,7 +60,7 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div id="heroes-pic" class="panel">
             <div class="panel-heading">
               <h4 class="panel-heading">Heroes Played</h4>
@@ -60,7 +69,7 @@
           </div>
         </div>
 
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div id="heroes-data-panel" class="panel">
             <div class="panel-heading">
               <h4 class="panel-title">Heroes (Competitive)</h4>
